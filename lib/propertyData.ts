@@ -31,6 +31,14 @@ export interface RenovationProperty {
   type: string;
 }
 
+export interface VideoProperty {
+  id: string;
+  title: string;
+  description: string;
+  youtubeUrl: string;
+  type: "video";
+}
+
 // Mapping functions
 function mapToProperty(row: any): Property {
   return {
@@ -58,7 +66,7 @@ function mapToProperty(row: any): Property {
 
 function mapToRenovationProperty(row: any): RenovationProperty {
   return {
-    id: row.id?.trim() || crypto.randomUUID(),
+    id: row.id?.trim() || crypto_randomUUID(),
     title: row.title?.trim() || "Untitled Renovation",
     location: row.location?.trim() || "",
     beforeImages: row.beforeImage ? row.beforeImage.split(",").map((url: string) => url.trim()) : [],
@@ -71,6 +79,16 @@ function mapToRenovationProperty(row: any): RenovationProperty {
     status: row.status?.trim() || "Planned",
   };
 }
+
+function mapToVideoProperty(row: any): VideoProperty {
+    return {
+      id: row.id?.trim() || crypto.randomUUID(),
+      title: row.title?.trim() || "Untitled Video",
+      description: row.description?.trim() || "",
+      youtubeUrl: row.youtubeUrl?.trim() || "",
+      type: "video",
+    };
+  }
 
 // Public API
 export async function getAllProperties(): Promise<Property[]> {
@@ -109,6 +127,11 @@ export async function getBeforeAfterProperties(): Promise<RenovationProperty[]> 
   const renovationProperties = rows.filter((r) => r.type === "renovate").map(mapToRenovationProperty);
   return renovationProperties.filter((r) => r.beforeImages?.length > 0 && r.afterImages?.length > 0);
 }
+
+export async function getFeaturedVideos(): Promise<VideoProperty[]> {
+    const rows = await getSheetData();
+    return rows.filter((r) => r.type === "video").map(mapToVideoProperty);
+  }
 
 
 export async function getAllPropertyIds() {
