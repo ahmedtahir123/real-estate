@@ -104,9 +104,11 @@ export async function getPropertyById(id: string): Promise<Property | null> {
 }
 
 export async function getBeforeAfterProperties(): Promise<RenovationProperty[]> {
-  const rows = await getRenovationProperties();
-  return rows.filter((r) => r.beforeImages?.length > 0 && r.afterImages?.length > 0);
+  const rows = await getSheetData();
+  const renovationProperties = rows.filter((r) => r.type === "renovate").map(mapToRenovationProperty);
+  return renovationProperties.filter((r) => r.beforeImages?.length > 0 && r.afterImages?.length > 0);
 }
+
 
 export async function getAllPropertyIds() {
   const data = await getAllProperties();
