@@ -124,7 +124,6 @@ export async function getBeforeAfterProperties(): Promise<RenovationProperty[]> 
 
 export async function getFeaturedVideos(): Promise<VideoProperty[]> {
     const rows = await getSheetData();
-    console.log(rows.filter((r) => r.videoUrl))
     return rows.filter((r) => r.videoUrl).map(mapToVideoProperty);
   }
 
