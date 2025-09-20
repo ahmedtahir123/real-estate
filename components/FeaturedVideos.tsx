@@ -1,15 +1,42 @@
 import { getFeaturedVideos } from '@/lib/propertyData';
 import { Youtube } from 'lucide-react';
 
-function getYouTubeVideoId(url: string) {
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-  const match = url.match(regExp);
+function getYouTubeVideoId(url: string): string | null {
+  if (!url) return null;
+  let videoId = null;
+  try {
+    const urlObj = new URL(url);
+    if (urlObj.hostname === 'youtu.be') {
+      videoId = urlObj.pathname.slice(1);
+    } else if (urlObj.hostname.includes('youtube.com')) {
+      if (urlObj.pathname.startsWith('/embed/')) {
+        videoId = urlObj.pathname.split('/')[2];
+      } else {
+        videoId = urlObj.searchParams.get('v');
+      }
+    }
+  } catch (error) {
+    // Fallback for non-URL strings or invalid URLs
+    const patterns = [
+      /(?:https?:\/\/)?(?:www\.)?youtube\.com\/(?:watch\?v=|embed\/|v\/|)([\w-]{11})/,
+      /(?:https?:\/\/)?(?:www\.)?youtu\.be\/([\w-]{11})/,
+    ];
 
-  if (match && match[2].length === 11) {
-    return match[2];
-  } else {
-    return null;
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match && match[1]) {
+        videoId = match[1];
+        break;
+      }
+    }
   }
+
+  // Final check on the extracted ID format
+  if (videoId && /^[a-zA-Z0-9_-]{11}$/.test(videoId)) {
+    return videoId;
+  }
+  
+  return null;
 }
 
 export default async function FeaturedVideos() {
