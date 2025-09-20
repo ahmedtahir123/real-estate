@@ -17,7 +17,7 @@ function getYouTubeVideoId(url: string): string | null {
   } catch (error) {
     // Fallback for non-URL strings or invalid URLs
     const patterns = [
-      /(?:https?:\/\/)?(?:www\.)?youtube\.com\/(?:watch\?v=|embed\/|v\/|)([\w-]{11})/,
+      /(?:https?:\/\/)?(?:www\.)?youtube\.com\/(?:watch\?v=|embed\/|v\/)([\w-]{11})/,
       /(?:https?:\/\/)?(?:www\.)?youtu\.be\/([\w-]{11})/,
     ];
 
@@ -47,6 +47,14 @@ export default async function FeaturedVideos() {
     {
       id: '2',
       youtubeUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    },
+    {
+      id: '3',
+      youtubeUrl: 'https://www.youtube.com/watch?v=LXb3EKWsInQ',
+    },
+    {
+      id: '4',
+      youtubeUrl: 'https://www.youtube.com/watch?v=Y_plhk1FUQA',
     }
   ];
 
@@ -64,7 +72,7 @@ export default async function FeaturedVideos() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
           {videos.map((video) => {
             const videoId = getYouTubeVideoId(video.youtubeUrl);
             if (!videoId) return null;
