@@ -1,5 +1,5 @@
 
-import { getAllProperties, getBeforeAfterProperties } from "./propertyData";
+import { getAllProperties, getBeforeAfterProperties, getFeaturedVideos } from "./propertyData";
 
 let warmed = false;
 
@@ -10,7 +10,7 @@ export async function warmupCache() {
   try {
     warmed = true;
     console.log("⏳ Warming up Google Sheet cache...");
-    await Promise.all([getAllProperties(), getBeforeAfterProperties()]);
+    await Promise.all([getAllProperties(), getBeforeAfterProperties(), getFeaturedVideos()]);
     console.log("✅ Google Sheet data cached!");
   } catch (err) {
     warmed = false; // allow retry
