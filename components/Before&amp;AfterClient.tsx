@@ -113,7 +113,3 @@ export default function BeforeAfterClient({ property }) {
             </div>
           ))}
         </div>
-      </div>
-    </div>
-  );
-}
