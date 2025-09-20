@@ -88,7 +88,7 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
             <div>
               <h4 className="text-lg font-semibold mb-2">Phone</h4>
-              <p className="text-blue-100">(555) 123-4567</p>
+              <p className="text-blue-100">+92-3341241699<br/>+92-3228293847</p>
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-2">Email</h4>
@@ -96,7 +96,7 @@ export default function About() {
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-2">Address</h4>
-              <p className="text-blue-100">123 Main Street<br />Downtown, NY 10001</p>
+              <p className="text-blue-100">13d2 Gulshan e Iqbal<br />Karachi</p>
             </div>
           </div>
         </div>

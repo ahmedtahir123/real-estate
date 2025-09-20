@@ -16,7 +16,6 @@ export default function Navigation() {
     { href: '/houses-for-sale', label: 'For Sale' },
     { href: '/featured-houses', label: 'Featured' },
     { href: '/before-after', label: 'Before & After' },
-    { href: '/sheet-data', label: 'Sheet Data' },
   ];
 
   return (

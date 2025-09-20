@@ -110,20 +110,20 @@ export default async function RootLayout({
               "url": "https://propertyxchange.com",
               "logo": "https://propertyxchange.com/logo.png",
               "image": "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg",
-              "telephone": "(555) 123-4567",
+              "telephone": "+92-3341241699",
               "email": "info@propertyxchange.com",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "123 Main Street",
-                "addressLocality": "Downtown",
-                "addressRegion": "NY",
-                "postalCode": "10001",
-                "addressCountry": "US"
+                "streetAddress": "13d2 Gulshan e Iqbal",
+                "addressLocality": "Karachi",
+                "addressRegion": "SD",
+                "postalCode": "75300",
+                "addressCountry": "PK"
               },
               "geo": {
                 "@type": "GeoCoordinates",
-                "latitude": "40.7128",
-                "longitude": "-74.0060"
+                "latitude": "24.9200",
+                "longitude": "67.1263"
               },
               "openingHours": "Mo-Fr 09:00-18:00, Sa 10:00-16:00",
               "priceRange": "$$",
@@ -131,12 +131,12 @@ export default async function RootLayout({
                 "@type": "GeoCircle",
                 "geoMidpoint": {
                   "@type": "GeoCoordinates",
-                  "latitude": "40.7128",
-                  "longitude": "-74.0060"
+                  "latitude": "24.9200",
+                  "longitude": "67.1263"
                 },
                 "geoRadius": "50000"
               },
-              "areaServed": ["New York", "New Jersey", "Connecticut"],
+              "areaServed": ["Karachi", "Lahore", "Islamabad"],
               "hasOfferCatalog": {
                 "@type": "OfferCatalog",
                 "name": "Real Estate Services",

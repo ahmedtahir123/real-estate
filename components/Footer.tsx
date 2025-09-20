@@ -42,11 +42,11 @@ export default function Footer() {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <MapPin className="h-5 w-5 text-blue-400" />
-                <span className="text-gray-400">123 Main Street, Downtown, NY 10001</span>
+                <span className="text-gray-400">13d2 Gulshan e Iqbal, Karachi</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-blue-400" />
-                <span className="text-gray-400">(555) 123-4567</span>
+                <span className="text-gray-400">+92-3341241699 / +92-3228293847</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-blue-400" />

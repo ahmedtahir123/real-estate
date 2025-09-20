@@ -148,7 +148,7 @@ export default function PropertyDetailClient({ property }) {
                 <div className="space-y-3">
                   <div className="flex items-center text-gray-600">
                     <Phone className="h-5 w-5 mr-3" />
-                    <span>(555) 123-4567</span>
+                    <span>+92-3341241699</span>
                   </div>
                   <div className="flex items-center text-gray-600">
                     <Mail className="h-5 w-5 mr-3" />
