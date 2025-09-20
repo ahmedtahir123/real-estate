@@ -33,8 +33,6 @@ export interface RenovationProperty {
 
 export interface VideoProperty {
   id: string;
-  title: string;
-  description: string;
   youtubeUrl: string;
   type: "video";
 }
@@ -66,11 +64,11 @@ function mapToProperty(row: any): Property {
 
 function mapToRenovationProperty(row: any): RenovationProperty {
   return {
-    id: row.id?.trim() || crypto_randomUUID(),
+    id: row.id?.trim() || crypto.randomUUID(),
     title: row.title?.trim() || "Untitled Renovation",
     location: row.location?.trim() || "",
-    beforeImages: row.beforeImage ? row.beforeImage.split(",").map((url: string) => url.trim()) : [],
-    afterImages: row.afterImage ? row.afterImage.split(",").map((url: string) => url.trim()) : [],
+    beforeImages: row.beforeImages ? row.beforeImages.split(",").map((url: string) => url.trim()) : [],
+    afterImages: row.afterImages ? row.afterImages.split(",").map((url: string) => url.trim()) : [],
     renovationDescription: row.renovationDescription?.trim() || "",
     projectDuration: row.projectDuration?.trim() || "",
     renovationCost: row.renovationCost?.trim() || "",
@@ -83,8 +81,6 @@ function mapToRenovationProperty(row: any): RenovationProperty {
 function mapToVideoProperty(row: any): VideoProperty {
     return {
       id: row.id?.trim() || crypto.randomUUID(),
-      title: row.title?.trim() || "Untitled Video",
-      description: row.description?.trim() || "",
       youtubeUrl: row.youtubeUrl?.trim() || "",
       type: "video",
     };

@@ -36,26 +36,17 @@ export default async function FeaturedVideos() {
 
             return (
               <div key={video.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="relative">
+                <div className="relative aspect-video">
                   <iframe
                     width="100%"
-                    height="315"
+                    height="100%"
                     src={`https://www.youtube.com/embed/${videoId}`}
-                    title={video.title}
+                    title="Featured Property Video"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
-                    className="w-full"
+                    className="absolute top-0 left-0 w-full h-full"
                   ></iframe>
-                </div>
-                <div className="p-6">
-                  <div className="flex items-start space-x-3">
-                    <Youtube className="h-8 w-8 text-red-600 mt-1" />
-                    <div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">{video.title}</h3>
-                      <p className="text-gray-600 text-sm">{video.description}</p>
-                    </div>
-                  </div>
                 </div>
               </div>
             );
