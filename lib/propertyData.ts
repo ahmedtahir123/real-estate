@@ -1,4 +1,5 @@
 import { getSheetData } from "./getSheetData";
+import Papa from "papaparse";
 
 // lib/properties.ts
 export interface Property {
@@ -60,8 +61,8 @@ function mapToRenovationProperty(row: any): RenovationProperty {
     id: row.id?.trim() || crypto.randomUUID(),
     title: row.title?.trim() || "Untitled Renovation",
     location: row.location?.trim() || "",
-    beforeImages: row.beforeImages ? row.beforeImages.split(",").map((url: string) => url.trim()) : [],
-    afterImages: row.afterImages ? row.afterImages.split(",").map((url: string) => url.trim()) : [],
+    beforeImages: row.beforeImage ? row.beforeImage.split(",").map((url: string) => url.trim()) : [],
+    afterImages: row.afterImage ? row.afterImage.split(",").map((url: string) => url.trim()) : [],
     renovationDescription: row.renovationDescription?.trim() || "",
     projectDuration: row.projectDuration?.trim() || "",
     renovationCost: row.renovationCost?.trim() || "",

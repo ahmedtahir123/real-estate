@@ -1,11 +1,11 @@
 // This file will be a server component
-import BeforeAfterClient from '@/components/Before&AfterClient';
-import { getAllPropertyIds, getBeforeAfterProperties } from '@/lib/propertyData';
+import BeforeAfterClient from '@/components/BeforeAfterClient';
+import { getBeforeAfterProperties } from '@/lib/propertyData';
 
 // This is your main page component, now a server component
 export default async function BeforeAfter() {
-  const property = await getBeforeAfterProperties();
+  const properties = await getBeforeAfterProperties();
 
   // Pass the fetched data to the client component
-  return <BeforeAfterClient property={property} />;
+  return <BeforeAfterClient properties={properties} />;
 }

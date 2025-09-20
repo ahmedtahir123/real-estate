@@ -9,7 +9,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 
-export default function BeforeAfterClient({ property }) {
+export default function BeforeAfterClient({ properties }) {
   const [showAfter, setShowAfter] = useState<{ [key: string]: boolean }>({});
 
   const toggleBeforeAfter = (id: string) => {
@@ -35,7 +35,7 @@ export default function BeforeAfterClient({ property }) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {property.map((p) => (
+          {properties.map((p) => (
             <div
               key={p.id}
               className="bg-white rounded-lg shadow-lg overflow-hidden"
