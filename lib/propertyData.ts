@@ -112,6 +112,6 @@ export async function getBeforeAfterProperties(): Promise<RenovationProperty[]> 
 
 export async function getAllPropertyIds() {
   const data = await getAllProperties();
-  // This is a placeholder. In a real app, this would fetch from a database.
+  // This is a placeholder.In a real app, this would fetch from a database.
   return data.map(i => i.id);
 }
