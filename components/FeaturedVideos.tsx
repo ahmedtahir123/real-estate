@@ -20,7 +20,7 @@ export default async function FeaturedVideos() {
   }
 
   return (
-    <div className="bg-gray-50 py-20">
+    <div className="bg-white py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Featured Videos</h2>
@@ -33,8 +33,6 @@ export default async function FeaturedVideos() {
           {videos.map((video) => {
             const videoId = getYouTubeVideoId(video.youtubeUrl);
             if (!videoId) return null;
-
-            const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 
             return (
               <div key={video.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
