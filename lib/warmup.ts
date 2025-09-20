@@ -1,5 +1,5 @@
 
-import { getAllProperties, getBeforeAfterProperties, getFeaturedVideos } from "./propertyData";
+import { getAllProperties, getBeforeAfterProperties } from "./propertyData";
 
 let warmed = false;
 

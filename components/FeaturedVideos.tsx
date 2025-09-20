@@ -1,4 +1,4 @@
-import { Youtube } from 'lucide-react';
+import { getFeaturedVideos } from "@/lib/propertyData";
 
 function getYouTubeVideoId(url: string): string | null {
   if (!url) return null;
@@ -39,26 +39,11 @@ function getYouTubeVideoId(url: string): string | null {
 }
 
 export default async function FeaturedVideos() {
-  const videos = [
-    {
-      id: '1',
-      youtubeUrl: 'https://www.youtube.com/watch?v=F55UtgXeIDs',
-    },
-    {
-      id: '2',
-      youtubeUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    },
-    {
-      id: '3',
-      youtubeUrl: 'https://www.youtube.com/watch?v=LXb3EKWsInQ',
-    },
-    {
-      id: '4',
-      youtubeUrl: 'https://www.youtube.com/watch?v=Y_plhk1FUQA',
-    }
-  ];
+  const featuredVideo = (await getFeaturedVideos());
 
-  if (!videos || videos.length === 0) {
+  console.log({featuredVideo})
+
+  if (!featuredVideo || featuredVideo.length === 0) {
     return null;
   }
 
@@ -73,8 +58,8 @@ export default async function FeaturedVideos() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {videos.map((video) => {
-            const videoId = getYouTubeVideoId(video.youtubeUrl);
+          {featuredVideo.map((video) => {
+            const videoId = getYouTubeVideoId(video.videoUrl);
             if (!videoId) return null;
 
             return (

@@ -6,12 +6,12 @@ import FeaturedVideos from '@/components/FeaturedVideos';
 
 export default function Home() {
   return (
-    <div>
+    <>
       <Hero />
       <QuickSearch />
       <FeaturedProperties />
       <FeaturedVideos />
       <AboutSection />
-    </div>
+    </>
   );
 }

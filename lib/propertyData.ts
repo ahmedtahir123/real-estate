@@ -33,8 +33,7 @@ export interface RenovationProperty {
 
 export interface VideoProperty {
   id: string;
-  youtubeUrl: string;
-  type: "video";
+  videoUrl: string;
 }
 
 // Mapping functions
@@ -81,8 +80,7 @@ function mapToRenovationProperty(row: any): RenovationProperty {
 function mapToVideoProperty(row: any): VideoProperty {
     return {
       id: row.id?.trim() || crypto.randomUUID(),
-      youtubeUrl: row.video?.trim() || "",
-      type: "video",
+      videoUrl: row.videoUrl?.trim() || "",
     };
   }
 
@@ -126,7 +124,8 @@ export async function getBeforeAfterProperties(): Promise<RenovationProperty[]> 
 
 export async function getFeaturedVideos(): Promise<VideoProperty[]> {
     const rows = await getSheetData();
-    return rows.filter((r) => r.type === "video" && r.video).map(mapToVideoProperty);
+    console.log(rows.filter((r) => r.videoUrl))
+    return rows.filter((r) => r.videoUrl).map(mapToVideoProperty);
   }
 
 
