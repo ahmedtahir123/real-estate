@@ -10,7 +10,7 @@ export async function warmupCache() {
   try {
     warmed = true;
     console.log("⏳ Warming up Google Sheet cache...");
-    await Promise.all([getAllProperties(), getBeforeAfterProperties(), getFeaturedVideos()]);
+    await Promise.all([getAllProperties(), getBeforeAfterProperties()]);
     console.log("✅ Google Sheet data cached!");
   } catch (err) {
     warmed = false; // allow retry
