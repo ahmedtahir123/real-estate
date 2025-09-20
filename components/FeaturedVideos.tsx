@@ -1,4 +1,3 @@
-import { getFeaturedVideos } from '@/lib/propertyData';
 import { Youtube } from 'lucide-react';
 
 function getYouTubeVideoId(url: string): string | null {
@@ -40,7 +39,16 @@ function getYouTubeVideoId(url: string): string | null {
 }
 
 export default async function FeaturedVideos() {
-  const videos = await getFeaturedVideos();
+  const videos = [
+    {
+      id: '1',
+      youtubeUrl: 'https://www.youtube.com/watch?v=F55UtgXeIDs',
+    },
+    {
+      id: '2',
+      youtubeUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    }
+  ];
 
   if (!videos || videos.length === 0) {
     return null;
