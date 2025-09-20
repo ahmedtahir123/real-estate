@@ -81,7 +81,7 @@ function mapToRenovationProperty(row: any): RenovationProperty {
 function mapToVideoProperty(row: any): VideoProperty {
     return {
       id: row.id?.trim() || crypto.randomUUID(),
-      youtubeUrl: row.youtubeUrl?.trim() || "",
+      youtubeUrl: row.video?.trim() || "",
       type: "video",
     };
   }
