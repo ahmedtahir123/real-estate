@@ -20,30 +20,15 @@ export interface RenovationProperty {
   id: string;
   title: string;
   location: string;
-  beforeImage: string;
-  afterImage: string;
+  beforeImages: string[];
+  afterImages: string[];
   renovationDescription: string;
   projectDuration: string;
   renovationCost: string;
   renovationYear: string;
   status: string;
-  type: string
+  type: string;
 }
-
-// const SHEET_URL =
-//   "https://docs.google.com/spreadsheets/d/e/2PACX-1vT7qvnn70OAPreQ2E-pd6V5ZDRZDHYrMz7o8qnonS3RsIHkkltcjnxQ-ZuhWmWlekbpa07zZbFK6Fs9/pub?output=csv";
-
-// // Convert CSV -> rows
-// async function getSheetData() {
-//   const res = await fetch(SHEET_URL, { next: { revalidate: 300 } }); // ✅ cache 5 min
-//   const text = await res.text();
-//   const rows = text.split("\n").map((r) => r.split(","));
-//   const headers = rows[0].map((h) => h.trim());
-
-//   return rows.slice(1).map((row) =>
-//     Object.fromEntries(row.map((val, i) => [headers[i], val.trim()]))
-//   );
-// }
 
 // Mapping functions
 function mapToProperty(row: any): Property {
@@ -75,8 +60,8 @@ function mapToRenovationProperty(row: any): RenovationProperty {
     id: row.id?.trim() || crypto.randomUUID(),
     title: row.title?.trim() || "Untitled Renovation",
     location: row.location?.trim() || "",
-    beforeImage: row.beforeImage?.trim() || "",
-    afterImage: row.afterImage?.trim() || "",
+    beforeImages: row.beforeImages ? row.beforeImages.split(",").map((url: string) => url.trim()) : [],
+    afterImages: row.afterImages ? row.afterImages.split(",").map((url: string) => url.trim()) : [],
     renovationDescription: row.renovationDescription?.trim() || "",
     projectDuration: row.projectDuration?.trim() || "",
     renovationCost: row.renovationCost?.trim() || "",
@@ -89,7 +74,7 @@ function mapToRenovationProperty(row: any): RenovationProperty {
 // Public API
 export async function getAllProperties(): Promise<Property[]> {
   const rows = await getSheetData();
-  return rows.filter((r) => r.type).map(mapToProperty);
+  return rows.filter((r) => r.type && (r.type === 'rent' || r.type === 'sale')).map(mapToProperty);
 }
 
 export async function getRenovationProperties(): Promise<RenovationProperty[]> {
@@ -120,7 +105,7 @@ export async function getPropertyById(id: string): Promise<Property | null> {
 
 export async function getBeforeAfterProperties(): Promise<RenovationProperty[]> {
   const rows = await getRenovationProperties();
-  return rows.filter((r) => r.beforeImage && r.afterImage).map(mapToRenovationProperty);
+  return rows.filter((r) => r.beforeImages?.length > 0 && r.afterImages?.length > 0);
 }
 
 export async function getAllPropertyIds() {

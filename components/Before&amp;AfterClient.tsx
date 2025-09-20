@@ -107,13 +107,3 @@ export default function BeforeAfterClient({ property }) {
                         {p.status}
                       </span>
                     </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
