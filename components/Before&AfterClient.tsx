@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { Key, useState } from 'react';
 import {
   Carousel,
   CarouselContent,
@@ -8,8 +8,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import { RenovationProperty } from '@/lib/propertyData';
+import Image from 'next/image';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
-export default function BeforeAfterClient({ property }) {
+  export default function BeforeAfterClient({ property }: { property: RenovationProperty[] }) {
   const [showAfter, setShowAfter] = useState<{ [key: string]: boolean }>({});
 
   const toggleBeforeAfter = (id: string) => {
@@ -44,9 +47,9 @@ export default function BeforeAfterClient({ property }) {
                 <Carousel className="w-full">
                   <CarouselContent>
                     {(showAfter[p.id] ? p.afterImages : p.beforeImages).map(
-                      (img, i) => (
+                      (img: string | StaticImport, i: number ) => (
                         <CarouselItem key={i}>
-                          <img
+                          <Image
                             src={img}
                             alt={`${p.title} - ${
                               showAfter[p.id] ? 'After' : 'Before'
