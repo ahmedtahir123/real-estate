@@ -26,3 +26,4 @@ export async function getSheetData() {
 
   return parsed.data as any[]; // each row is now a clean JS object
 }
+
