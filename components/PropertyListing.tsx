@@ -91,7 +91,7 @@ export default function PropertyListing({ properties, type }: PropertyListingPro
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Filters */}
-      <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
+      {/* <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold text-gray-900">Filter Properties</h2>
           <div className="flex items-center space-x-2">
@@ -177,7 +177,7 @@ export default function PropertyListing({ properties, type }: PropertyListingPro
             Reset
           </button>
         </div>
-      </div>
+      </div> */}
 
       {/* Results Summary */}
       <div className="mb-8">
