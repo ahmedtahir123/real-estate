@@ -1,9 +1,21 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import PropertyCard from './PropertyCard';
-import { Grid, List } from 'lucide-react';
-import { Property } from '@/lib/propertyData';
+import { Filter, Grid, List } from 'lucide-react';
+
+interface Property {
+  id: string;
+  title: string;
+  price: string;
+  location: string;
+  bedrooms: number;
+  bathrooms: number;
+  area: number;
+  images: string[];
+  type: 'rent' | 'sale';
+  isFeatured?: boolean;
+}
 
 interface PropertyListingProps {
   properties: Property[];
@@ -25,8 +37,8 @@ export default function PropertyListing({ properties, type }: PropertyListingPro
 
   const locations = [...new Set(properties.map(p => p.location))];
 
-  useEffect(() => {
-    let filtered = properties.filter(p => p.type === type);
+  const applyFilters = () => {
+    let filtered = properties;
 
     if (filters.location) {
       filtered = filtered.filter(p => p.location.toLowerCase().includes(filters.location.toLowerCase()));
@@ -35,14 +47,14 @@ export default function PropertyListing({ properties, type }: PropertyListingPro
     if (filters.minPrice) {
       filtered = filtered.filter(p => {
         const price = parseInt(p.price.replace(/[^0-9]/g, ''));
-        return !isNaN(price) && price >= parseInt(filters.minPrice);
+        return price >= parseInt(filters.minPrice);
       });
     }
 
     if (filters.maxPrice) {
       filtered = filtered.filter(p => {
         const price = parseInt(p.price.replace(/[^0-9]/g, ''));
-        return !isNaN(price) && price <= parseInt(filters.maxPrice);
+        return price <= parseInt(filters.maxPrice);
       });
     }
 
@@ -56,13 +68,7 @@ export default function PropertyListing({ properties, type }: PropertyListingPro
 
     setFilteredProperties(filtered);
     setCurrentPage(1);
-  }, [properties, filters, type]);
-
-  
-  const handleFilterChange = (filterName: string, value: string) => {
-    setFilters(prev => ({ ...prev, [filterName]: value }));
   };
-
 
   const resetFilters = () => {
     setFilters({
@@ -72,6 +78,8 @@ export default function PropertyListing({ properties, type }: PropertyListingPro
       bedrooms: '',
       bathrooms: ''
     });
+    setFilteredProperties(properties);
+    setCurrentPage(1);
   };
 
   // Pagination
@@ -105,7 +113,7 @@ export default function PropertyListing({ properties, type }: PropertyListingPro
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4">
           <select
             value={filters.location}
-            onChange={(e) => handleFilterChange('location', e.target.value)}
+            onChange={(e) => setFilters({...filters, location: e.target.value})}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">All Locations</option>
@@ -118,7 +126,7 @@ export default function PropertyListing({ properties, type }: PropertyListingPro
             type="number"
             placeholder="Min Price"
             value={filters.minPrice}
-            onChange={(e) => handleFilterChange('minPrice', e.target.value)}
+            onChange={(e) => setFilters({...filters, minPrice: e.target.value})}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
@@ -126,13 +134,13 @@ export default function PropertyListing({ properties, type }: PropertyListingPro
             type="number"
             placeholder="Max Price"
             value={filters.maxPrice}
-            onChange={(e) => handleFilterChange('maxPrice', e.target.value)}
+            onChange={(e) => setFilters({...filters, maxPrice: e.target.value})}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
           <select
             value={filters.bedrooms}
-            onChange={(e) => handleFilterChange('bedrooms', e.target.value)}
+            onChange={(e) => setFilters({...filters, bedrooms: e.target.value})}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Any Bedrooms</option>
@@ -144,7 +152,7 @@ export default function PropertyListing({ properties, type }: PropertyListingPro
 
           <select
             value={filters.bathrooms}
-            onChange={(e) => handleFilterChange('bathrooms', e.target.value)}
+            onChange={(e) => setFilters({...filters, bathrooms: e.target.value})}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Any Bathrooms</option>
@@ -156,10 +164,17 @@ export default function PropertyListing({ properties, type }: PropertyListingPro
 
         <div className="flex space-x-4">
           <button
+            onClick={applyFilters}
+            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center"
+          >
+            <Filter className="h-4 w-4 mr-2" />
+            Apply Filters
+          </button>
+          <button
             onClick={resetFilters}
             className="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors duration-200"
           >
-            Reset Filters
+            Reset
           </button>
         </div>
       </div> */}
@@ -167,7 +182,7 @@ export default function PropertyListing({ properties, type }: PropertyListingPro
       {/* Results Summary */}
       <div className="mb-8">
         <p className="text-gray-600">
-          Showing {currentProperties.length > 0 ? indexOfFirstProperty + 1 : 0}-{Math.min(indexOfLastProperty, filteredProperties.length)} of {filteredProperties.length} properties
+          Showing {indexOfFirstProperty + 1}-{Math.min(indexOfLastProperty, filteredProperties.length)} of {filteredProperties.length} properties
         </p>
       </div>
 
