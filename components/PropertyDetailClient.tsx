@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import { MapPin, Bed, Bath, Square, ChevronLeft, ChevronRight, Phone, Mail } from 'lucide-react';
+import { Property } from '@/lib/propertyData';
 
-export default function PropertyDetailClient({ property }) {
+export default function PropertyDetailClient({ property }: { property: Property }) {
+  
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [formData, setFormData] = useState({
     name: '',
