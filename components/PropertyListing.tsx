@@ -1,21 +1,9 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import PropertyCard from './PropertyCard';
 import { Grid, List } from 'lucide-react';
-
-interface Property {
-  id: string;
-  title: string;
-  price: string;
-  location: string;
-  bedrooms: number;
-  bathrooms: number;
-  area: number;
-  images: string[];
-  type: 'rent' | 'sale';
-  isFeatured?: boolean;
-}
+import { Property } from '@/lib/propertyData';
 
 interface PropertyListingProps {
   properties: Property[];
@@ -37,7 +25,7 @@ export default function PropertyListing({ properties, type }: PropertyListingPro
 
   const locations = [...new Set(properties.map(p => p.location))];
 
-  const applyFilters = useCallback(() => {
+  useEffect(() => {
     let filtered = properties.filter(p => p.type === type);
 
     if (filters.location) {
@@ -69,10 +57,6 @@ export default function PropertyListing({ properties, type }: PropertyListingPro
     setFilteredProperties(filtered);
     setCurrentPage(1);
   }, [properties, filters, type]);
-
-  useEffect(() => {
-    applyFilters();
-  }, [applyFilters]);
 
   
   const handleFilterChange = (filterName: string, value: string) => {
